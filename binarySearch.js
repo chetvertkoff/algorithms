@@ -10,9 +10,9 @@ const binarySearch = (data, val) => {
     let mid = Math.floor(( high + low ) / 2);
 
     while (high >= low) {
-        if (data[mid] === val) return mid;
-        else if(data[mid] > val) high = mid - 1;
-        else if(data[mid] < val) low = mid + 1;
+        if (val === data[mid]) return mid;
+        else if(val < data[mid]) high = mid - 1;
+        else if(val > data[mid]) low = mid + 1;
         mid = Math.floor(( high + low ) / 2);
     }
 
