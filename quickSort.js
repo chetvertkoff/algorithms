@@ -2,7 +2,7 @@
  * Быстрая сортировка (сложность O(n×log2n))
  */
 
-const arr = [15, 5, 12, 9, 13, 1, 14, 2, 11, 6, 4, 3, 8, 10, 7];
+const arr = [15, 5, 12, 2, 15, 15 ];
 
 const quickSort = (data) => {
     if (data.length < 2) return data;
