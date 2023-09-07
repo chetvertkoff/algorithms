@@ -2,21 +2,24 @@
  * Быстрая сортировка (сложность O(n×log2n))
  */
 
-const arr = [15, 5, 12, 2, 15, 15 ];
+const arr = [15, 5, 12, 2, 15, 15, 7 ];
 
-const quickSort = (data) => {
-    if (data.length < 2) return data;
+const quickSort = (arr) => {
+    if(arr.length < 2) return arr
 
-    let pivot = data[0];
-    let less = [];
-    let greater = [];
+    let pivot = arr[0]
 
-    for (let i = 0; i < data.length; i++) {
-        if (data[i] > pivot) greater.push(data[i]);
-        else if (data[i] < pivot) less.push(data[i])
-    }
+    let great = []
+    let less = []
 
-    return quickSort(less).concat(pivot).concat(quickSort(greater));
+    arr.forEach((item) => {
+        if(item > pivot) great.push(item)
+        if(item < pivot) less.push(item)
+    })
+
+
+    return [...quickSort(less), pivot, ...quickSort(great)]
+
 }
 
 console.log(quickSort(arr))

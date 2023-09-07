@@ -2,43 +2,35 @@
  * сортировка слиянием  O(n * log (n))
  */
 
-// слияние массивов с одновременной сортировкой
-// на вход подаются уже отсортированные левая и правая части
-function merge(left, right) {
-    // сюда будем складывать результат
-    let arr = []
-    // пока в каждой части есть хотя бы один элемент — выполняем цикл
-    while (left.length && right.length) {
-        // смотрим на наименьший элемент из тех, что стоят в начале обоих массивов
-        if (left[0] < right[0]) {
-            // если слева был элемент меньше —
-            // забираем его оттуда и отправляем в массив с результатом
-            arr.push(left.shift())
-        } else {
-            // в противном случае забираем элемент из правой части
-            arr.push(right.shift())
-        }
-    }
-    // выводим результат слияния отсортированных массивов
+const merge = (left, right) => {
+    let k = (left.length + right.length) - 1
+    let l = left.length - 1
+    let r = right.length - 1
 
-    // возвращаем отсортированный массив и добавляем к нему в конец отсортированный остаток от какой-либо части, если её так и не обработали в цикле
-    return [ ...arr, ...left, ...right ]
+    while(r >= 0) {
+        if(left[l] > right[r]) { // сравниваем с конца массивов два последних элемента
+            left[k] = left[l]
+            l--
+        } else {
+            left[k] = right[r]
+            r--
+        }
+        k--
+    }
+
+    return [...left]
 }
 
-// делим массивы пополам до тех пор, пока в них не останется элементов
-function mergeSort(array) {
-    // находим середину
-    const middle = array.length / 2
+const mergeSort = (arr) => {
+    if(arr.length < 2) return arr
 
-    // если в нашем массиве и так меньше двух элементов — возвращаем его
-    if(array.length < 2) return array
+    let mid = arr.length / 2
 
-    // делим массив на две части и левую отправляем в новый массив
-    const left = array.splice(0, middle)
-    // запускаем рекурсию и отдаём ей правую и левую части массива
-    return merge(mergeSort(left),mergeSort(array))
+    const left = arr.splice(0, mid)
+
+    return merge(mergeSort(left), mergeSort(arr))
 }
 
 // исходный массив
-array = [3, 5, 1,5, 6, 9, 8, 2];
+array = [1,4, 7,5,1,3,4,2,6,];
 console.log(mergeSort(array));
